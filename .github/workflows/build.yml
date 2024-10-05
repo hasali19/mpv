@@ -201,7 +201,8 @@ jobs:
           path: |
             build/mpv.???
             build/vulkan-*.dll
-            !build/mpv.lib
+            build/mpv.lib
+            build/libmpv*.*
 
       - name: Save Cache
         uses: actions/cache/save@v4
