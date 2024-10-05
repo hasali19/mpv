@@ -178,7 +178,7 @@ clone-recursive = true
 
 meson setup build `
     --wrap-mode=forcefallback `
-    -Ddefault_library=static `
+    -Ddefault_library=shared `
     -Dlibmpv=true `
     -Dtests=true `
     -Dgpl=true `
@@ -211,6 +211,6 @@ meson setup build `
     -Drubberband=disabled `
     -Dwayland=disabled `
     -Dx11=disabled
-ninja -C build mpv.exe mpv.com libmpv.a
+ninja -C build mpv.exe mpv.com libmpv-2.dll
 cp ./build/subprojects/vulkan-loader/vulkan.dll ./build/vulkan-1.dll
 ./build/mpv.com -v --no-config
