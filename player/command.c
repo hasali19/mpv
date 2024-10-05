@@ -24,6 +24,7 @@
 #include <time.h>
 #include <math.h>
 #include <sys/types.h>
+#include <stdio.h>
 
 #include <ass/ass.h>
 #include <libavutil/avstring.h>
@@ -5971,6 +5972,7 @@ static void cmd_track_add(void *p)
     }
 
     if (cmd->args[1].v.i == 2) {
+        printf("switching track\n");
         struct track *t = find_track_with_url(mpctx, type, cmd->args[0].v.s);
         if (t) {
             if (mpctx->playback_initialized) {
@@ -5989,6 +5991,7 @@ static void cmd_track_add(void *p)
         return;
     }
 
+    printf("first=%d, num_tracks=%d\n", first, mpctx->num_tracks);
     for (int n = first; n < mpctx->num_tracks; n++) {
         struct track *t = mpctx->tracks[n];
         if (cmd->args[1].v.i == 1) {
@@ -6001,11 +6004,15 @@ static void cmd_track_add(void *p)
             }
         }
         char *title = cmd->args[2].v.s;
-        if (title && title[0])
+        if (title && title[0]) {
+            printf("title: %s\n", title);
             t->title = talloc_strdup(t, title);
+        }
         char *lang = cmd->args[3].v.s;
-        if (lang && lang[0])
+        if (lang && lang[0]) {
+            printf("lang: %s\n");
             t->lang = talloc_strdup(t, lang);
+        }
     }
 
     if (mpctx->playback_initialized)
